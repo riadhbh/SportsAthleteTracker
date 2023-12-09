@@ -1,5 +1,5 @@
 QT       += core gui
-
+QT       += quick
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -18,8 +18,7 @@ HEADERS += \
     constants.h \
     videoprocessor.h
 
-FORMS += \
-    athletetrackerView.ui
+RESOURCES += athletetrackerview.qrc
 
 INCLUDEPATH += "D:/opencv/build/install/include" \
                "D:/darknet-master\include"
