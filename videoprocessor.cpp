@@ -113,7 +113,6 @@ double VideoProcessor::calculateDifference(const cv::Rect2d& rect1, const cv::Re
         std::cerr<<e.what()<<std::endl;
         emit processingFailed();
         return std::numeric_limits<double>::min();;
-        throw;
     }
 }
 
@@ -176,7 +175,7 @@ cv::Rect2d VideoProcessor::findNearestRectangle(const std::vector<PersonDetectio
         float maxConfidence = rectVector[0].confidence;
         cv::Rect2d nearestRect = rectVector[0].rect;
 
-        for (const PersonDetection& detect : rectVector)
+        for (const auto& detect : rectVector)
         {
             double difference = calculateDifference(detect.rect, targetRect);
             if (difference < minDifference && detect.confidence >= maxConfidence)
@@ -194,7 +193,6 @@ cv::Rect2d VideoProcessor::findNearestRectangle(const std::vector<PersonDetectio
         std::cerr<<e.what()<<std::endl;
         emit processingFailed();
         return cv::Rect2d();//empty
-        throw;
     }
 }
 
@@ -217,7 +215,7 @@ std::vector<PersonDetection> VideoProcessor::detectPersonsYOLO(cv::dnn::Net &yol
         yoloNet.forward(yoloOutputs, yoloNet.getUnconnectedOutLayersNames());
 
        // Process the detection results for persons
-        for (const cv::Mat &output : yoloOutputs)
+        for (const auto &output : yoloOutputs)
         {
             for (int i = 0; i < output.rows; ++i)
             {
@@ -248,7 +246,6 @@ std::vector<PersonDetection> VideoProcessor::detectPersonsYOLO(cv::dnn::Net &yol
         std::cerr<<e.what()<<std::endl;
         emit processingFailed();
         return detections;
-        throw;
     }
 }
 

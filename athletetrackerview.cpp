@@ -50,7 +50,7 @@ void AthleteTrackerView::onProcessBtnClick()
         // Create an instance of VideoProcessor
         VideoProcessor* videoProcessor = new VideoProcessor();
         // Create a QThread and move the VideoProcessor to the thread
-        QThread* thread = new QThread;
+        auto thread = new QThread;
         videoProcessor->moveToThread(thread);
         videoProcessor->setVideoInputVideoFilePath(selectedFile.toStdString());
         // Connect signals/slots for cleanup
